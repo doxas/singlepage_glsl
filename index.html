@@ -2,25 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script id="fs" type="xs/fs">
-precision mediump float; uniform float t; uniform vec2 r;
-vec3 hsv(float h, float s, float v){
-vec4 t = vec4(1., 2. / 3., 1. / 3., 3.);
-vec3 p = abs(fract(vec3(h) + t.xyz) * 6. - vec3(t.w));
-return v * mix(vec3(t.x), clamp(p - vec3(t.x), 0., 1.), s);}
-void main(void){
-vec2 x = vec2(-.345, .654); vec2 y = vec2(t * .005, 0.);
-vec2 z = (gl_FragCoord.xy * 2. - r) / max(r.x, r.y); int j = 0;
-for(int i = 0; i < 360; i++){j++; if(length(z) > 2.){break;}
-z = vec2(z.x * z.x - z.y * z.y, 2. * z.x * z.y) + x + y;}
-float h = abs(mod(t * 15. - float(j), 360.) / 360.);
-gl_FragColor = vec4(hsv(h, 1., 1.), 1.);
-}
-        </script>
-        <script id="vs" type="xs/vs">
-attribute vec3 position;
-void main(void){gl_Position = vec4(position, 1.0);}
-        </script>
+        <title>single page glsl</title>
         <style>
             * {
                 margin: 0px;
@@ -32,9 +14,9 @@ void main(void){gl_Position = vec4(position, 1.0);}
                 height: 100%
             }
         </style>
-        <title>single page glsl</title>
+        <script src="./script.js"></script>
     </head>
     <body>
-        <canvas id="webgl"></canvas>
+        <canvas id="webglcanvas"></canvas>
     </body>
 </html>
